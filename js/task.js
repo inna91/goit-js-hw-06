@@ -19,15 +19,8 @@ console.log(getUsersWithEyeColor(users, "blue")); // [объект Moore Hensley
 
 //TASK-03//
 
-const getUsersWithGender = (users, gender) => {
-  users
-    .filter((user) => {
-      return user.gender === gender;
-    })
-    .map((user) => {
-      return user.name;
-    });
-};
+const getUsersWithGender = (users, gender) =>
+  users.filter((user) => user.gender === gender).map((user) => user.name);
 
 console.log(getUsersWithGender(users, "male")); // [ 'Moore Hensley', 'Ross Vazquez', 'Carey Barr', 'Blackburn Dotson' ]
 
@@ -65,15 +58,10 @@ const calculateTotalBalance = (users) => {
 console.log(calculateTotalBalance(users)); // 20916
 
 //TASK-08//
-const getUsersWithFriend = (users, friendName) => {
+const getUsersWithFriend = (users, friendName) =>
   users
-    .filter((user) => {
-      return user.friends.includes(friendName);
-    })
-    .map((user) => {
-      return user.name;
-    });
-};
+    .filter((user) => user.friends.includes(friendName))
+    .map((user) => user.name);
 
 console.log(getUsersWithFriend(users, "Briana Decker")); // [ 'Sharlene Bush', 'Sheree Anthony' ]
 console.log(getUsersWithFriend(users, "Goldie Gentry")); // [ 'Elma Head', 'Sheree Anthony' ]
@@ -92,16 +80,11 @@ console.log(getNamesSortedByFriendsCount(users));
 
 //TASK-10//
 
-const getSortedUniqueSkills = (users) => {
-  const allUserSkills = users.reduce((skills, user) => {
-    return skills.concat(user.skills);
-  }, []);
-  return allUserSkills
-    .filter((skill, index) => {
-      return index === allUserSkills.indexOf(skill);
-    })
+const getSortedUniqueSkills = (users) =>
+  users
+    .reduce((skills, user) => skills.concat(user.skills), [])
+    .filter((skill, index, users) => users.indexOf(skill) === index)
     .sort();
-};
 
 console.log(getSortedUniqueSkills(users));
 // [ 'adipisicing', 'amet', 'anim', 'commodo', 'culpa', 'elit', 'ex', 'ipsum', 'irure', 'laborum', 'lorem', 'mollit', 'non', 'nostrud', 'nulla', 'proident', 'tempor', 'velit', 'veniam' ]
