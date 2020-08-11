@@ -20,13 +20,13 @@ console.log(getUsersWithEyeColor(users, "blue")); // [объект Moore Hensley
 //TASK-03//
 
 const getUsersWithGender = (users, gender) => {
-  let name = [];
-  users.filter((user) => {
-    if (user.gender === gender) {
-      name.push(user.name);
-    }
-  });
-  return name;
+  users
+    .filter((user) => {
+      return user.gender === gender;
+    })
+    .map((user) => {
+      return user.name;
+    });
 };
 
 console.log(getUsersWithGender(users, "male")); // [ 'Moore Hensley', 'Ross Vazquez', 'Carey Barr', 'Blackburn Dotson' ]
@@ -66,13 +66,13 @@ console.log(calculateTotalBalance(users)); // 20916
 
 //TASK-08//
 const getUsersWithFriend = (users, friendName) => {
-  let usersIncludesFriend = [];
-  users.filter((user) => {
-    if (user.friends.includes(friendName)) {
-      usersIncludesFriend.push(user.name);
-    }
-  });
-  return usersIncludesFriend;
+  users
+    .filter((user) => {
+      return user.friends.includes(friendName);
+    })
+    .map((user) => {
+      return user.name;
+    });
 };
 
 console.log(getUsersWithFriend(users, "Briana Decker")); // [ 'Sharlene Bush', 'Sheree Anthony' ]
@@ -91,36 +91,17 @@ console.log(getNamesSortedByFriendsCount(users));
 // [ 'Moore Hensley', 'Sharlene Bush', 'Elma Head', 'Carey Barr', 'Blackburn Dotson', 'Sheree Anthony', 'Ross Vazquez' ]
 
 //TASK-10//
+
 const getSortedUniqueSkills = (users) => {
-  return users
-    .reduce((allUserSkills, user) => {
-      allUserSkills.push(...user.skills);
-      return allUserSkills;
-    }, [])
-    .reduce((uniqueSkills, skill) => {
-      if (!uniqueSkills.includes(skill)) {
-        uniqueSkills.push(skill);
-      }
-      return uniqueSkills;
-    }, [])
+  const allUserSkills = users.reduce((skills, user) => {
+    return skills.concat(user.skills);
+  }, []);
+  return allUserSkills
+    .filter((skill, index) => {
+      return index === allUserSkills.indexOf(skill);
+    })
     .sort();
 };
-
-//2 вариант//
-// const getSortedUniqueSkills = (users) => {
-//   let uniqueSkills = [];
-//   users
-//     .reduce((allUserSkills, user) => {
-//       allUserSkills.push(...user.skills);
-//       return allUserSkills;
-//     }, [])
-//     .forEach((skill) => {
-//       if (!uniqueSkills.includes(skill)) {
-//         uniqueSkills.push(skill);
-//       }
-//     });
-//   return uniqueSkills.sort();
-// };
 
 console.log(getSortedUniqueSkills(users));
 // [ 'adipisicing', 'amet', 'anim', 'commodo', 'culpa', 'elit', 'ex', 'ipsum', 'irure', 'laborum', 'lorem', 'mollit', 'non', 'nostrud', 'nulla', 'proident', 'tempor', 'velit', 'veniam' ]
